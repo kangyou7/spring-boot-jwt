@@ -1,0 +1,9 @@
+jwt:
+ secret: zeta
+ get:
+  token:
+   uri: /auth/token
+ expire:
+ 
+server:
+ port: 8889

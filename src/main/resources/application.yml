@@ -1,0 +1,30 @@
+jwt:
+ secret: zeta
+ except: >
+  /authenticate
+  /hello
+ expire:
+  hour: 24
+ 
+server:
+ port: 8889
+
+logging:
+ level:
+  root: debug
+  jdbc.sqlonly: debug
+  jdbc.sqltiming: debug
+  jdbc.audit: error
+  jdbc.resultset: errorspring:
+  profiles:
+   active: local
+
+---
+
+spring:
+  profiles: local
+  datasource:
+   username: glyde
+   password: glyde1234!
+   driver-class-name: org.postgresql.Driver
+   url: jdbc:postgresql://localhost:15432/glyde01?ssl=false 
