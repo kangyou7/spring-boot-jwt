@@ -12,5 +12,15 @@ public class HelloWorldController {
 	public String hello() {
 		return "Hello World";
 	}
+	
+	@RequestMapping({ "/api/ex/1" })
+	public String hello1() {
+		return "Hello World";
+	}
+	
+	@RequestMapping({ "/api/exx" })
+	public String hello2() {
+		return "Hello World";
+	}
 
 }

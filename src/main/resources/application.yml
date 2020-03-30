@@ -2,20 +2,14 @@ jwt:
  secret: zeta
  except: >
   /authenticate
-  /hello
+  /api/**
  expire:
   hour: 24
  
 server:
  port: 8889
 
-logging:
- level:
-  root: debug
-  jdbc.sqlonly: debug
-  jdbc.sqltiming: debug
-  jdbc.audit: error
-  jdbc.resultset: errorspring:
+spring:
   profiles:
    active: local
 

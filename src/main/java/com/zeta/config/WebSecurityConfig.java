@@ -58,16 +58,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
 		/**
+		 * 인증을 거쳐야 되는 URL을 제일 앞에 설정.
 		 * jwt루틴에서 예외처리할 URL을 yml에서 읽어들여 처리
+		 * 
+		 * 아래 해석.
+		 * 1. "/api/ex/**"로 시작되는 것은 모두 인증을 거쳐야 한다.
+		 * 2. jwtExceptParams로 시작되는 것은 모두 허락한다.
+		 * 3. 그외 것들은 모두 인증을 거쳐야 한다.
 		 */
 		String[] jwtExceptParams = jwtExcept.toArray(new String[jwtExcept.size()]);
 		
 		// We don't need CSRF for this example
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers(jwtExceptParams).permitAll().
+				.authorizeRequests()
+				.antMatchers("/api/ex/**").authenticated()
+				.antMatchers(jwtExceptParams).permitAll()
 				// all other requests need to be authenticated
-				anyRequest().authenticated().and().
+				.anyRequest().authenticated().and().
 				// make sure we use stateless session; session won't be used to
 				// store user's state.
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
